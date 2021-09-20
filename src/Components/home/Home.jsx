@@ -19,14 +19,27 @@ const Home = () => {
       })
       .then((res) => {
         alert("Successfully added!!");
+        window.location.reload();
       });
   };
 
   return (
     <div>
-      <h1 className="text-center text-uppercase">
-        this is my simple to do apps
-      </h1>
+      <div className="align-items-center d-flex justify-content-between ">
+        <div className="">
+          <a href="https://github.com/shakil51298/mySql_client" className="btn btn-sm btn-secondary">Source Code</a>
+        </div>
+        <div className="border p-2">
+          <h1>
+            <span className="text-warning">MySQl</span>
+            <span className="text-info">Todo</span>
+            <span className="text-danger">App</span>
+          </h1>
+        </div>
+        <div className="">
+          <button className="btn btn-sm btn-secondary">My Portfolio</button>
+        </div>
+      </div>
       <table class="table">
         <tbody>
           <tr>

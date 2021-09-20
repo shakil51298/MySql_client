@@ -30,7 +30,7 @@ const StudentTable = () => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Year</th>
@@ -60,6 +60,7 @@ const StudentTable = () => {
           ))}
         </tbody>
       </table>
+      <p className="text-center text-muted">MD KAHLID HOSSAIN(李开文) © 2021</p>
     </div>
   );
 };
