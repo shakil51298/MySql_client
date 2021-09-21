@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { userContext } from "../../App";
 
 const StudentTable = () => {
@@ -22,7 +23,15 @@ const StudentTable = () => {
           axios("http://localhost:5000/student/info/Get/").then((data) =>
             setStudentData(data.data)
           );
-          console.log(res);
+          toast.success("Congratulations!!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         });
     }
   };
@@ -80,6 +89,17 @@ const StudentTable = () => {
         </tbody>
       </table>
       <p className="text-center text-muted">MD KAHLID HOSSAIN(李开文) © 2021</p>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

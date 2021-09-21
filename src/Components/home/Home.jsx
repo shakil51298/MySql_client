@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import StudentTable from "./StudentTable";
 
 const Home = () => {
@@ -18,8 +19,8 @@ const Home = () => {
         phn: phn,
       })
       .then((res) => {
-        alert("Successfully added!!");
-        window.location.reload();
+        alert('Successfully added!!')
+        setTimeout(window.location.reload(), 50000);
       });
   };
 
@@ -89,6 +90,17 @@ const Home = () => {
         </tbody>
       </table>
       <StudentTable />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

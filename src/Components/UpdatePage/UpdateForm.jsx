@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { userContext } from "../../App";
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateForm = () => {
   const [context] = useContext(userContext);
@@ -12,7 +14,6 @@ const UpdateForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const submitForm = (e) => {
-
     const fNm = e.target[0].value;
     const lNm = e.target[1].value;
     const year = e.target[2].value;
@@ -27,11 +28,18 @@ const UpdateForm = () => {
         phoneNumber: phn,
       })
       .then((res) => {
-        console.log(res);
+        toast.success("🦄 Wow updated!!!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     console.log("data updated!!");
 
-    
     e.preventDefault();
   };
   return (
@@ -105,6 +113,17 @@ const UpdateForm = () => {
           </tbody>
         </table>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
