@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../../App";
 
 const StudentTable = () => {
   const [studentData, setStudentData] = useState([]);
-  console.log(studentData);
+  const [context, setContext] = useContext(userContext);
 
   useEffect(() => {
     axios("http://localhost:5000/student/info/Get/").then((data) =>
@@ -27,7 +28,8 @@ const StudentTable = () => {
   };
 
   const handleUpdateStudentInfo = (id) => {
-    console.log(id);
+    const student = studentData.filter((sd) => sd.id == id);
+    setContext(student[0]);
   };
 
   return (

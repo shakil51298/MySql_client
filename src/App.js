@@ -8,7 +8,7 @@ export const userContext = createContext();
 
 
 function App() {
-  const [context, setContext] = useState('');
+  const [context, setContext] = useState([]);
   return (
     <userContext.Provider value={[context, setContext]}>
       <Router>

@@ -1,32 +1,39 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../../App";
 
 const UpdateForm = () => {
+  const [context] = useContext(userContext);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastNfame] = useState("");
   const [year, setYear] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  console.log(firstName, lastName, year, phoneNumber);
-  const handleFistName = (e) => {
-    setFirstName(e.target.value);
-  };
 
-  const handleLastName = (e) => {
-    setLastNfame(e.target.value);
-  };
+  const submitForm = (e) => {
 
-  const handleYear = (e) => {
-    setYear(e.target.value);
-  };
+    const fNm = e.target[0].value;
+    const lNm = e.target[1].value;
+    const year = e.target[2].value;
+    const phn = e.target[3].value;
+    // console.log(fNm, lNm, year, phn);
+    axios
+      .put("http://localhost:5000/update/studentinfo/", {
+        id: context.id,
+        firstName: fNm,
+        lastName: lNm,
+        year: year,
+        phoneNumber: phn,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    console.log("data updated!!");
 
-  const handlePhoneNumber = (e) => {
-    setPhoneNumber(e.target.value);
+    
+    e.preventDefault();
   };
-
-  const handleUpdateSubmit = () => {
-    console.log("update catching");
-  };
-
   return (
     <div className="container mt-5">
       <div className="align-items-center d-flex justify-content-between ">
@@ -54,53 +61,50 @@ const UpdateForm = () => {
       <div className="mt-3">
         <h2 className="text-danger text-center">Update</h2>
       </div>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="fName"
-                placeholder="First Name"
-                onBlur={(e) => handleFistName(e)}
-                defaultValue="sdsd"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                name="lName"
-                placeholder="Last Name"
-                onBlur={(e) => handleLastName(e)}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                name="year"
-                placeholder="Year"
-                onBlur={(e) => handleYear(e)}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                name="phn"
-                placeholder="phone Number"
-                onBlur={(e) => handlePhoneNumber(e)}
-              />
-            </td>
-            <td>
-              <button
-                class="btn btn-sm btn-primary w-100"
-                onClick={(e) => handleUpdateSubmit(e)}
-              >
-                ADD
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <form action="" onSubmit={submitForm}>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  name="fName"
+                  placeholder="First Name"
+                  defaultValue={context.first_name}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="lName"
+                  placeholder="Last Name"
+                  defaultValue={context.last_name}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="year"
+                  placeholder="Year"
+                  defaultValue={context.year}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="phn"
+                  placeholder="phone Number"
+                  defaultValue={context.phone_number}
+                />
+              </td>
+              <td>
+                <button class="btn btn-sm btn-primary w-100">ADD</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
   );
 };
