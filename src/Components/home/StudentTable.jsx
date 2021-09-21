@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const StudentTable = () => {
   const [studentData, setStudentData] = useState([]);
@@ -25,6 +25,11 @@ const StudentTable = () => {
         });
     }
   };
+
+  const handleUpdateStudentInfo = (id) => {
+    console.log(id);
+  };
+
   return (
     <div>
       <table className="table">
@@ -37,6 +42,9 @@ const StudentTable = () => {
             <th scope="col">Phone Number</th>
             <th scope="col" className="text-danger">
               Action
+            </th>
+            <th scope="col" className="text-warning">
+              Update Setting
             </th>
           </tr>
         </thead>
@@ -55,6 +63,15 @@ const StudentTable = () => {
                 >
                   Delete
                 </button>
+              </td>
+              <td>
+                <Link
+                  onClick={() => handleUpdateStudentInfo(student.id)}
+                  className="btn text-warning"
+                  to="/student/info/update"
+                >
+                  Update
+                </Link>
               </td>
             </tr>
           ))}
